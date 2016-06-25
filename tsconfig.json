@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "outDir": "build",
+        "sourceMap": true,
+        "target": "es2015"
+    },
+    "compileOnSave": false,
+    "exclude": [
+        "build",
+        "typings/browser.d.ts",
+        "typings/browser",
+        "node_modules"
+    ]
+}
