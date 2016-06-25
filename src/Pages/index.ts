@@ -1,1 +1,1 @@
-export {default as PagesList} from './PagesList';
+export {default as pagesRoutes} from './pagesRoutes';
