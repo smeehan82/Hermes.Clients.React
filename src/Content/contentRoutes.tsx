@@ -8,8 +8,7 @@ import ContentTypeList from './ContentTypeList';
 export default (
     <Route path='/content'>
         <IndexRoute component={ContentTypeList} />
-        <Route path=':urlName' component={ContentList}>
-             <Route path=':slug' component={ContentDetails} />
-        </Route>
+        <Route path=':urlName' component={ContentList} />
+        <Route path=':urlName/:slug' component={ContentDetails} />
     </Route>
 );
