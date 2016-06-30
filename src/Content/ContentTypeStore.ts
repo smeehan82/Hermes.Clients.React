@@ -16,7 +16,7 @@ class ContentTypeStore {
     @action
     private async getContentType() {
         const contentType = await this.getContentTypeFromServer();
-        runInAction('getPages', () => {
+        runInAction('getContentType', () => {
             this._contentType = contentType;
         });
     }
@@ -32,8 +32,6 @@ class ContentTypeStore {
 
 const singleton = new ContentTypeStore();
 export default singleton;
-
-
 
 const fakeContentType = [
     {
