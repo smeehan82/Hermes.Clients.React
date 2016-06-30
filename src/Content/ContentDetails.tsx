@@ -1,17 +1,36 @@
 import * as React from 'react';
 import {observer} from 'mobx-react';
 
-import ContentStore from './ContentStore';
+import {IContent} from './Content'
+import BookStore from './BookStore';
+import MusicalInstumentStore from './MusicalIntrumentStore';
+import QuoteStore from './QuoteStore';
 
 interface IProps {
     params: {
+        urlName: string;
         slug: string;
     };
 }
 
 function ContentDetails(props: IProps) {
-    const content = ContentStore.content.find(p => props.params.slug === p.slug);
-    console.log(content);
+    const ContentType = props.params.urlName;
+    
+    if( ContentType === "musical-instruments"){
+        const content = MusicalInstumentStore.content.find(c=> props.params.slug === c.slug);
+        return RenderContent(content, props);
+    }else if(ContentType === "books"){
+        const content = BookStore.content.find(c=> props.params.slug === c.slug);
+        return RenderContent(content, props);
+    }else if(ContentType === "quotes"){
+        const content = QuoteStore.content.find(c=> props.params.slug === c.slug);
+        return RenderContent(content, props);
+    }
+}
+
+export default observer(ContentDetails);
+
+function RenderContent(content: IContent, props: IProps) {
     return (
         <div>
             <h2>{content.title}</h2>
@@ -19,5 +38,3 @@ function ContentDetails(props: IProps) {
         </div>
     );
 }
-
-export default observer(ContentDetails);

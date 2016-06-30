@@ -2,7 +2,10 @@ import * as React from 'react';
 import {observer} from 'mobx-react';
 import {Link} from 'react-router';
 
-import ContentStore from './ContentStore';
+import {IContent} from './Content';
+import BookStore from './BookStore';
+import MusicalInstumentStore from './MusicalIntrumentStore';
+import QuoteStore from './QuoteStore';
 
 interface IProps {
     params: {
@@ -11,10 +14,26 @@ interface IProps {
 }
 
 function ContentList(props: IProps) {
-    const content = ContentStore.content.filter(c => props.params.urlName === c.contentType)
-    return ContentStore.content.filter(c => props.params.urlName === c.contentType).length > 0 ? (
+    const ContentType = props.params.urlName;
+
+    if( ContentType === "musical-instruments"){
+        const content = MusicalInstumentStore.content;
+        return RenderContent(content, props);
+    }else if(ContentType === "books"){
+        const content = BookStore.content;
+        return RenderContent(content, props);
+    }else if(ContentType === "quotes"){
+        const content = QuoteStore.content;
+        return RenderContent(content, props);
+    }
+}
+
+export default observer(ContentList);
+
+function RenderContent(content: IContent[], props: IProps) {
+    return content.length > 0 ? (
         <ul>
-            {ContentStore.content.filter(c => props.params.urlName === c.contentType).map(co => {
+            {content.map(co => {
                 return (
                     <li key={co.id}>
                         <Link to={`/content/${props.params.urlName}/${co.slug}`}>{co.title}</Link>
@@ -24,5 +43,3 @@ function ContentList(props: IProps) {
         </ul>
     ) : null;
 }
-
-export default observer(ContentList);
