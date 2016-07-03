@@ -4,7 +4,6 @@ import {IContent} from './Content';
 
 export abstract class ContentStore<TContent extends IContent> {
     constructor() {
-        console.log('abstract constructor called');
         this.getContent();
     }
 
@@ -24,15 +23,37 @@ export abstract class ContentStore<TContent extends IContent> {
         });
     }
 
+    @Mobx.action
+    protected addContent(content: TContent): void {
+        this._content.push(content);
+    }
+
+    @Mobx.action
+    protected addContentRange(contentRange: TContent[]): void {
+        console.log('adding content range %o', contentRange);
+        for(const content of contentRange) {
+            this._content.push(content);
+            console.log(this._content);
+        }
+    }
+
     private getContentFromServer(): Promise<TContent[]> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(this.fakeContent);
+                resolve([]);
             }, 300);
         });
     }
 
-    abstract mapContentFromJson(jsonObj: any[]): TContent[];
+    protected mapContentFromJson(jsonObj: any, content: TContent): TContent {
+        content.id = jsonObj.id;
+        content.concurrencyStamp = jsonObj.concurrencyStamp;
+        content.title = jsonObj.title;
+        content.slug = jsonObj.slug;
+        content.dateCreated = jsonObj.dateCreated;
+        content.dateModified = jsonObj.dateModified;
+        content.datePublished = jsonObj.datePublished;
 
-    protected fakeContent: any[];
+        return content;
+    };
 }
