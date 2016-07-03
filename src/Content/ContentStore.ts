@@ -1,36 +1,38 @@
-import {observable, computed, action, runInAction} from 'mobx';
+import * as Mobx from 'mobx';
 
 import {IContent} from './Content';
 
-class ContentStore {
+export abstract class ContentStore<TContent extends IContent> {
     constructor() {
+        console.log('abstract constructor called');
         this.getContent();
     }
 
-    @observable private _content: IContent[] = [];
+    @Mobx.observable
+    protected _content: TContent[] = [];
 
-    @computed get content() {
+    @Mobx.computed
+    get content(): TContent[] {
         return this._content;
     }
 
-    @action
-    private async getContent() {
+    @Mobx.action
+    protected async getContent() {
         const content = await this.getContentFromServer();
-        runInAction('getContent', () => {
+        Mobx.runInAction('getContent', () => {
             this._content = content;
         });
     }
 
-    private getContentFromServer(): Promise<IContent[]> {
+    private getContentFromServer(): Promise<TContent[]> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(fakeContent);
+                resolve(this.fakeContent);
             }, 300);
         });
     }
+
+    abstract mapContentFromJson(jsonObj: any[]): TContent[];
+
+    protected fakeContent: any[];
 }
-
-const singleton = new ContentStore();
-export default singleton;
-
-const fakeContent = [ { } ];
