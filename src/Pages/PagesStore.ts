@@ -1,4 +1,3 @@
-import {observable, computed, action} from 'mobx';
 import * as Mobx from 'mobx';
 
 import {Page, IPage, IPageWithParams} from './Page';
@@ -8,11 +7,11 @@ class PagesStore {
         this.getPages();
     }
 
-    @observable private _pages: Page[] = [];
+    @Mobx.observable private _pages: Page[] = [];
+    @Mobx.computed get pages(): Page[] { return this._pages; }
 
-    @computed get pages() {
-        return this._pages;
-    }
+    @Mobx.observable private _isLoading: boolean = false;
+    @Mobx.computed get isLoading(): boolean { return this._isLoading; }
 
     getPageByPath = Mobx.createTransformer((path: string): IPageWithParams => {
         if (!path.startsWith('/')) {
@@ -49,22 +48,27 @@ class PagesStore {
         console.log('cleaning up transformation: %o, %o', b, sourceObj);
     });
 
-    @action
-    private async getPages() {
+    @Mobx.action
+    private getPages = async () => {
+        this._isLoading = true;
         const pages = await this.getPagesFromServer();
         Mobx.runInAction('getPages', () => {
             this._pages = pages;
+            this._isLoading = false;
         });
     }
 
+    @Mobx.action
     private getPagesFromServer(): Promise<Page[]> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const pages = (fakePageJson).map(pageJson => {
-                    return Page.mapFromJson(pageJson);
+                Mobx.runInAction('getPagesFromServer', () => {
+                    const pages = (fakePageJson).map(pageJson => {
+                        return new Page(pageJson);
+                    });
+                    resolve(pages);
                 });
-                resolve(pages);
-            }, 300);
+            }, 500);
         });
     }
 }
