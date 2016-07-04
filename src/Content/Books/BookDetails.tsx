@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {observer} from 'mobx-react';
-import {Link} from 'react-router';
 
 import BookStore from './BookStore';
 
