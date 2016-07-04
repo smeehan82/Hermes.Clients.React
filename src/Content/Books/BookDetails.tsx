@@ -18,6 +18,7 @@ export class BookDetails extends React.Component<IProps, void>{
         return (
             <div>
                 <h2>{book.title}</h2>
+                <p>Written by, {book.author}</p>
                 <p>[Book Detail Component]</p>
             </div>
         );
