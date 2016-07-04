@@ -18,6 +18,7 @@ export class QuoteDetail extends React.Component<IProps, void> {
         return (
             <div>
                 <h2>{quote.title}</h2>
+                <p>{quote.quote}</p>
                 <p>[Quote Detail Component]</p>
             </div>
         );

@@ -12,6 +12,7 @@ const fakeQuotes = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        quote: 'Today is a day that will live in infamy.',
     },
     {
         concurrencyStamp: 'F91E3935-DF71-4CB5-B84C-68532DF66DCD',
@@ -21,6 +22,7 @@ const fakeQuotes = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        quote: 'No boom today, boom tomorrow.  There`s always a boom tomorrow',
     },
     {
         concurrencyStamp: '8D20DFBB-D863-49C4-B029-5A8D72C83FC7',
@@ -30,15 +32,7 @@ const fakeQuotes = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
-    },
-    {
-        concurrencyStamp: 'CD1544FB-84B4-428C-9ABB-03455FE71217',
-        id: '8F754ED6-09BB-4EA3-AEB8-B98118ABB62C',
-        title: 'Bad',
-        slug: 'bad',
-        dateCreated: Date.now,
-        dateModified: Date.now,
-        datePublished: Date.now,
+        quote: 'People are idiots, they will believe a lie if they fear it is true',
     }
 ];
 
@@ -52,7 +46,7 @@ class QuoteStore extends ContentStore<Quote> {
     protected mapContentFromJson(jsonObj: any): Quote {
         const quote = new Quote();
         super.mapContentFromJson(jsonObj, quote);
-        quote.author = jsonObj.author;
+        quote.quote = jsonObj.quote;
 
         return quote;
     }
