@@ -13,7 +13,6 @@ interface IProps {
 @observer
 export class QuoteDetail extends React.Component<IProps, void> {
     render(){
-        console.log('Quote details rendering: %o', QuoteStore);
         const quote = QuoteStore.content.find(b=>b.slug === this.props.params.slug);
 
         return (

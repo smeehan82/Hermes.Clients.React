@@ -4,7 +4,6 @@ import {IContent} from './Content';
 
 export abstract class ContentStore<TContent extends IContent> {
     constructor() {
-        console.log('abstract constructor');
         this.getContent();
     }
 
@@ -19,13 +18,11 @@ export abstract class ContentStore<TContent extends IContent> {
     @Mobx.action
     //protected async getContent() {
     protected getContent() {
-        console.log('getting fake content');
         //const content = await this.getContentFromServer();
         this._content = [];
         //Mobx.runInAction('getContent', () => {
 //            this._content = content;
 //        });
-        console.log('fake content retrieved');
     }
 
     @Mobx.action
@@ -35,12 +32,9 @@ export abstract class ContentStore<TContent extends IContent> {
 
     @Mobx.action
     protected addContentRange(contentRange: TContent[]): void {
-        console.log(this);
-        console.log('adding content range %o', contentRange);
         for(const content of contentRange) {
             this._content.push(content);
         }
-        console.log(this._content);
     }
 
     private getContentFromServer(): Promise<TContent[]> {

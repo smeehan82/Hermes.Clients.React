@@ -6,9 +6,7 @@ import MusicalInstrumentStore from './MusicalInstrumentStore';
 
 @observer
 export class MusicalInstrumentList extends React.Component<void, void> {
-    
     render() {
-        console.log('MusicalInstrument list rendering: %o', MusicalInstrumentStore);
         return (
             <div>
                 {MusicalInstrumentStore.content.length > 0 ? (

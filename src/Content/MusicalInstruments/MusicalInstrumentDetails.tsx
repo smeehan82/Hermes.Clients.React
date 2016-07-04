@@ -13,7 +13,6 @@ interface IProps {
 @observer
 export class MusicalInstrumentDetails extends React.Component<IProps, void> {
     render(){
-        console.log('MusicalInstrument details rendering: %o', MusicalInstrumentStore);
         const musicalInstrument = MusicalInstrumentStore.content.find(b=>b.slug === this.props.params.slug);
 
         return (

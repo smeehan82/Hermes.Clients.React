@@ -6,9 +6,7 @@ import QuoteStore from './QuoteStore';
 
 @observer
 export class QuoteList extends React.Component<void, void> {
-
     render() {
-        console.log('Quote list rendering: %o', QuoteStore);
         return (
             <div>
                 {QuoteStore.content.length > 0 ? (

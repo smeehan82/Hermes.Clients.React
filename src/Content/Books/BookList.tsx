@@ -6,14 +6,7 @@ import BookStore from './BookStore';
 
 @observer
 export class BookList extends React.Component<void, void> {
-
-    componentWillReact() {
-        console.log('book list reacting');
-    }
-
-
     render() {
-        console.log('Book list rendering: %o', BookStore);
         return (
             <div>
                 {BookStore.content.length > 0 ? (

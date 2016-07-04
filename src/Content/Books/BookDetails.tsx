@@ -13,7 +13,6 @@ interface IProps {
 @observer
 export class BookDetails extends React.Component<IProps, void>{
     render(){
-        console.log('Book details rendering: %o', BookStore);
         const book = BookStore.content.find(b=>b.slug === this.props.params.slug);
 
         return (
