@@ -14,10 +14,3 @@ export default (
         <Route path='sample-route-2' component={SampleRoute2} />
     </Route>
 );
-
-// <Route path='proposals' onEnter={requireAuthCheck} >
-//     <IndexRoute component={ProposalListView} />
-//     <Route path='create' component={CreateProposalWizard} />
-//     <Route path='add' component={ProposalAdd} />
-//     <Route path=':urlName' component={ProposalDetail} />
-// </Route>
