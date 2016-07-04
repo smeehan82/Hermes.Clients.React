@@ -7,6 +7,7 @@ import PageDetails from './PageDetails';
 export default (
     <Route path='/pages'>
         <IndexRoute component={PagesList}  />
-        <Route path=':id' component={PageDetails} />
+        <Route path=':slug/*' component={PageDetails} />
+        <Route path=':slug' component={PageDetails} />
     </Route>
 );

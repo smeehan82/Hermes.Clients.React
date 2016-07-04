@@ -13,31 +13,30 @@ class PagesStore {
     @Mobx.observable private _isLoading: boolean = false;
     @Mobx.computed get isLoading(): boolean { return this._isLoading; }
 
-    getPageByPath = Mobx.createTransformer((path: string): IPageWithParams => {
-        if (!path.startsWith('/')) {
+    getPageByPath = Mobx.createTransformer((path: {path: string}): IPageWithParams => {
+        if (!path.path.startsWith('/')) {
             throw 'path must start with /';
         }
-        let page: Page = null;
+        let page: Page = undefined;
         let params: string[] = [];
-        const sections = path.split('/');
+        const sections = path.path.split('/');
         if (sections.length === 1 && sections[0] === '') {
             page = this._pages.find(p => p.isIndexPage);
         }
         else {
             let pages = this._pages;
             for (const section of sections) {
-                if (section !== '') {
+                if (section !== '' && section !== 'pages') { //@TODO: account for being in the admin section
                     const maybePage = pages.find(p => p.slug === section);
-                    if (page === undefined) {
+                    if (maybePage === undefined) {
                         params = sections.slice(sections.indexOf(section));
                         break;
                     }
-                    pages = page.children;
                     page = maybePage;
+                    pages = page.children;
                 }
             }
         }
-
         if (page === null) {
             //TODO fix edge cases and improve error handling
             throw 'page not found';

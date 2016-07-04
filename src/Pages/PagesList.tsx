@@ -10,7 +10,7 @@ function PagesList() {
             {PagesStore.pages.map(p => {
                 return (
                     <li key={p.id}>
-                        <Link to={`/pages/${p.id}`}>{p.title}</Link>
+                        <Link to={`/pages/${p.slug}`}>{p.title}</Link>
                     </li>
                 );
             }) }
