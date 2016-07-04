@@ -1,0 +1,1 @@
+export {default as taxonomyRoutes} from './taxonomyRoutes';
