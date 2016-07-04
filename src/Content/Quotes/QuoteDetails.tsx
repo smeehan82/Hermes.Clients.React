@@ -10,16 +10,17 @@ interface IProps {
     };
 }
 
-function QuoteDetail(props: IProps) {
-    console.log('Quote details rendering: %o', QuoteStore);
-    const quote = QuoteStore.content.find(b=>b.slug === props.params.slug);
+@observer
+export class QuoteDetail extends React.Component<IProps, void> {
+    render(){
+        console.log('Quote details rendering: %o', QuoteStore);
+        const quote = QuoteStore.content.find(b=>b.slug === this.props.params.slug);
 
-    return (
-        <div>
-            <h2>{quote.title}</h2>
-            <p>[Quote Detail Component]</p>
-        </div>
-    );
+        return (
+            <div>
+                <h2>{quote.title}</h2>
+                <p>[Quote Detail Component]</p>
+            </div>
+        );
+    }
 }
-
-export default observer(QuoteDetail);

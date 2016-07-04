@@ -1,2 +1,2 @@
 export {QuoteList} from './QuoteList';
-export {default as QuoteDetail} from './QuoteDetails';
+export {QuoteDetail} from './QuoteDetails';
