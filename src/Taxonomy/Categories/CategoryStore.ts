@@ -12,6 +12,26 @@ const fakeCategorys = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        children: [
+            {
+                id: '5AAD6BF9-F52A-10D3-AC81-D8641177DA02',
+                concurrencyStamp: 'FBAE3935-DF71-4DB5-B84C-68532DF66DCD',
+                title: 'Child Category 1',
+                slug: 'child-category-1',
+                dateCreated: Date.now,
+                dateModified: Date.now,
+                datePublished: Date.now,
+            },
+            {
+                id: '6BAD6BF9-F52A-10D3-AC81-D8641177DA02',
+                concurrencyStamp: 'DCAE3935-DF71-4DB5-B84C-68532DF66DCD',
+                title: 'Child Category 2',
+                slug: 'child-category-2',
+                dateCreated: Date.now,
+                dateModified: Date.now,
+                datePublished: Date.now,
+            },
+        ]
     },
     {
         id: '5AAD6BF2-352A-10D3-AC81-D8641D77DA02',
