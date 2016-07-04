@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import PagesStore from './PagesStore';
 
 function PagesList() {
-    return PagesStore.pages.length > 0 ? (
+    return !PagesStore.isLoading ? (
         <ul>
             {PagesStore.pages.map(p => {
                 return (
@@ -15,7 +15,9 @@ function PagesList() {
                 );
             }) }
         </ul>
-    ) : null;
+    ) : (
+        <div>loading...</div>
+    );
 }
 
 export default observer(PagesList);
