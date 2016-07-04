@@ -6,14 +6,7 @@ import TagStore from './TagStore';
 
 @observer
 export class TagList extends React.Component<void, void> {
-
-    componentWillReact() {
-        console.log('tag list reacting');
-    }
-
-
     render() {
-        console.log('Tag list rendering: %o', TagStore);
         return (
             <div>
                 {TagStore.taxonomy.length > 0 ? (

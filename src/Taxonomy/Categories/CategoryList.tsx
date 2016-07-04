@@ -6,14 +6,7 @@ import CategoryStore from './CategoryStore';
 
 @observer
 export class CategoryList extends React.Component<void, void> {
-
-    componentWillReact() {
-        console.log('category list reacting');
-    }
-
-
     render() {
-        console.log('Category list rendering: %o', CategoryStore);
         return (
             <div>
                 {CategoryStore.taxonomy.length > 0 ? (

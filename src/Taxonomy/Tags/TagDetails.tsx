@@ -14,7 +14,6 @@ interface IProps {
 @observer
 export class TagDetails extends React.Component<IProps, void>{
     render(){
-        console.log('Tag details rendering: %o', TagStore);
         const tag = TagStore.taxonomy.find(t=>t.slug === this.props.params.slug);
 
         return (

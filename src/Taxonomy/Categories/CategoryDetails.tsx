@@ -14,7 +14,6 @@ interface IProps {
 @observer
 export class CategoryDetails extends React.Component<IProps, void>{
     render(){
-        console.log('Category details rendering: %o', CategoryStore);
         const category = CategoryStore.taxonomy.find(t=>t.slug === this.props.params.slug);
 
         return (
