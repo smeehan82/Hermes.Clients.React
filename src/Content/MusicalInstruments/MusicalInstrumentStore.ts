@@ -12,6 +12,7 @@ const fakeMusicalInstruments = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        instumentType: 'Brass',
     },
     {
         concurrencyStamp: 'CD2544FB-84B4-478C-9ABB-03455FE71217',
@@ -21,6 +22,7 @@ const fakeMusicalInstruments = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        instumentType: 'String',
     },
     {
         concurrencyStamp: 'F9AE3935-DF71-44B5-B84C-68532DF66DCD',
@@ -30,6 +32,7 @@ const fakeMusicalInstruments = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        instumentType: 'Keys',
     },
     {
         concurrencyStamp: '8DB0DFBB-D863-46C4-B029-5A8D72C83FC7',
@@ -39,6 +42,7 @@ const fakeMusicalInstruments = [
         dateCreated: Date.now,
         dateModified: Date.now,
         datePublished: Date.now,
+        instumentType: 'Wind',
     }
 ];
 
@@ -52,7 +56,7 @@ class MusicalInstrumentStore extends ContentStore<MusicalInstrument> {
     protected mapContentFromJson(jsonObj: any): MusicalInstrument {
         const musicalInstrument = new MusicalInstrument();
         super.mapContentFromJson(jsonObj, musicalInstrument);
-        musicalInstrument.author = jsonObj.author;
+        musicalInstrument.instumentType = jsonObj.instumentType;
 
         return musicalInstrument;
     }

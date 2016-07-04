@@ -18,6 +18,7 @@ export class MusicalInstrumentDetails extends React.Component<IProps, void> {
         return (
             <div>
                 <h2>{musicalInstrument.title}</h2>
+                <p>Instrument Type: {musicalInstrument.instumentType}</p>
                 <p>[MusicalInstrument Detail Component]</p>
             </div>
         );
