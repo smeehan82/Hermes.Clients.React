@@ -6,8 +6,6 @@ import {Link} from 'react-router';
 
 import {IContent} from './Content';
 import {BookList} from './Books';
-import MusicalInstumentStore from './MusicalIntrumentStore';
-import QuoteStore from './QuoteStore';
 
 interface IProps {
     params: {
