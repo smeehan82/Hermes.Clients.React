@@ -17,9 +17,13 @@ function getContentListComponent(
             case 'books':
                 cb(null, BookList);
                 break;
-
             case 'quotes':
+                cb(null, QuoteList);
+                break;
             case 'musical-instruments':
+                cb(null, MusicalInstrumentList);
+                break;
+            case 'blogs':
                 //render default content component
                 cb(null, ContentList);
                 break;
