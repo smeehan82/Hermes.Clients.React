@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Route, IndexRoute, Redirect} from 'react-router';
 
 import Root from './Root';
+import {mediaRoutes} from './Media';
 
 const DashboardView = () => <div>[Dashboard Component]</div>;
 const SampleRoute1 = () => <div>[Sample Route 1 Component]</div>;
@@ -12,6 +13,7 @@ export default (
         <IndexRoute component={DashboardView}  />
         <Route path='sample-route-1' component={SampleRoute1} />
         <Route path='sample-route-2' component={SampleRoute2} />
+        {mediaRoutes}
     </Route>
 );
 
