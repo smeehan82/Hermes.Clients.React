@@ -40,15 +40,7 @@ class QuoteStore extends ContentStore<Quote> {
 
     constructor() {
         super();
-        this.addContentRange(fakeQuotes.map(b => this.mapContentFromJson(b)));
-    }
-
-    protected mapContentFromJson(jsonObj: any): Quote {
-        const quote = new Quote();
-        super.mapContentFromJson(jsonObj, quote);
-        quote.quote = jsonObj.quote;
-
-        return quote;
+        this.addContentRange(fakeQuotes.map(q => new Quote().mapFromJson(q)));
     }
 }
 
