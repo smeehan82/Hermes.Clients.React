@@ -37,13 +37,7 @@ class TagStore extends TaxonomyStore<Tag> {
 
     constructor() {
         super();
-        this.addTaxonomyRange(fakeTags.map(b => this.mapTaxonomyFromJson(b)));
-    }
-
-    protected mapTaxonomyFromJson(jsonObj: any): Tag {
-        const tag = new Tag();
-        super.mapTaxonomyFromJson(jsonObj, tag);
-        return tag;
+        this.addTaxonomyRange(fakeTags.map(t => new Tag().mapFromJson(t)));
     }
 }
 
