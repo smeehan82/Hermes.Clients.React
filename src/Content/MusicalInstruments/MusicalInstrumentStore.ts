@@ -50,15 +50,7 @@ class MusicalInstrumentStore extends ContentStore<MusicalInstrument> {
 
     constructor() {
         super();
-        this.addContentRange(fakeMusicalInstruments.map(b => this.mapContentFromJson(b)));
-    }
-
-    protected mapContentFromJson(jsonObj: any): MusicalInstrument {
-        const musicalInstrument = new MusicalInstrument();
-        super.mapContentFromJson(jsonObj, musicalInstrument);
-        musicalInstrument.instumentType = jsonObj.instumentType;
-
-        return musicalInstrument;
+        this.addContentRange(fakeMusicalInstruments.map(m => new MusicalInstrument().mapFromJson(m)));
     }
 }
 
