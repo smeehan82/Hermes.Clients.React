@@ -16,6 +16,7 @@ export abstract class ContentStore<TContent extends IContent> {
     }
 
     @Mobx.action
+    //@TODO fix the async aspect of the store call
     //protected async getContent() {
     protected getContent() {
         //const content = await this.getContentFromServer();
@@ -44,16 +45,4 @@ export abstract class ContentStore<TContent extends IContent> {
             }, 0);
         });
     }
-
-    protected mapContentFromJson(jsonObj: any, content: TContent): TContent {
-        content.id = jsonObj.id;
-        content.concurrencyStamp = jsonObj.concurrencyStamp;
-        content.title = jsonObj.title;
-        content.slug = jsonObj.slug;
-        content.dateCreated = jsonObj.dateCreated;
-        content.dateModified = jsonObj.dateModified;
-        content.datePublished = jsonObj.datePublished;
-
-        return content;
-    };
 }
