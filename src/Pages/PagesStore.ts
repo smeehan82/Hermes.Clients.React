@@ -62,9 +62,7 @@ class PagesStore {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 Mobx.runInAction('getPagesFromServer', () => {
-                    const pages = (fakePageJson).map(pageJson => {
-                        return new Page(pageJson);
-                    });
+                    const pages = (fakePageJson).map(pageJson => new Page().mapFromJson(pageJson));
                     resolve(pages);
                 });
             }, 500);

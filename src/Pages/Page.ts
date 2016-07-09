@@ -16,36 +16,25 @@ export interface IPageWithParams {
 }
 
 export class Page implements IPage {
-    constructor(jsonObj?: any) {
-        Mobx.runInAction('pageConstructor', () => {
-            if (jsonObj) {
-                this.id = jsonObj.id;
-                this.concurrencyStamp = jsonObj.concurrencyStamp;
-                this.title = jsonObj.title;
-                this.slug = jsonObj.slug;
-                this.isIndexPage = jsonObj.isIndexPage;
-                this.hasTemplate = jsonObj.hasTemplate;
-                this.children = Array.isArray(jsonObj.children) ?
-                    jsonObj.children.map((c: any) => new Page(c))
-                    : [];
-            }
-            else {
-                this.id = '';
-                this.concurrencyStamp = '';
-                this.title = '';
-                this.slug = '';
-                this.isIndexPage = false;
-                this.hasTemplate = true;
-                this.children = [];
-            }
-        });
-    }
+    @Mobx.observable id: string = '';
+    @Mobx.observable concurrencyStamp: string = '';
+    @Mobx.observable title: string = '';
+    @Mobx.observable slug: string = '';
+    @Mobx.observable isIndexPage: boolean = false;
+    @Mobx.observable hasTemplate: boolean = true;
+    @Mobx.observable children: Page[] = [];
 
-    @Mobx.observable id: string;
-    @Mobx.observable concurrencyStamp: string;
-    @Mobx.observable title: string;
-    @Mobx.observable slug: string;
-    @Mobx.observable isIndexPage: boolean;
-    @Mobx.observable hasTemplate: boolean;
-    @Mobx.observable children: Page[];
+    @Mobx.action
+    mapFromJson = (jsonObj: any): Page => {
+        this.id = jsonObj.id;
+        this.concurrencyStamp = jsonObj.concurrencyStamp;
+        this.title = jsonObj.title;
+        this.slug = jsonObj.slug;
+        this.isIndexPage = jsonObj.isIndexPage;
+        this.hasTemplate = jsonObj.hasTemplate;
+        this.children = Array.isArray(jsonObj.children) ?
+            jsonObj.children.map((c: any) => new Page().mapFromJson(c))
+            : [];
+        return this;
+    }
 }
