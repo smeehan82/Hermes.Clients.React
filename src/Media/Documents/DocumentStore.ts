@@ -37,13 +37,7 @@ class DocumentStore extends MediaStore<Document> {
 
     constructor() {
         super();
-        this.addMediaRange(fakeDocuments.map(b => this.mapMediaFromJson(b)));
-    }
-
-    protected mapMediaFromJson(jsonObj: any): Document {
-        const document = new Document();
-        super.mapMediaFromJson(jsonObj, document);
-        return document;
+        this.addMediaRange(fakeDocuments.map(d => new Document().mapFromJson(d)));
     }
 }
 
