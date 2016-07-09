@@ -37,13 +37,7 @@ class VideoStore extends MediaStore<Video> {
 
     constructor() {
         super();
-        this.addMediaRange(fakeVideos.map(b => this.mapMediaFromJson(b)));
-    }
-
-    protected mapMediaFromJson(jsonObj: any): Video {
-        const video = new Video();
-        super.mapMediaFromJson(jsonObj, video);
-        return video;
+        this.addMediaRange(fakeVideos.map(v => new Video().mapFromJson(v)));
     }
 }
 
