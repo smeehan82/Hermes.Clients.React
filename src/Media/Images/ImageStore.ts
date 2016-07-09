@@ -37,13 +37,7 @@ class ImageStore extends MediaStore<Image> {
 
     constructor() {
         super();
-        this.addMediaRange(fakeImages.map(b => this.mapMediaFromJson(b)));
-    }
-
-    protected mapMediaFromJson(jsonObj: any): Image {
-        const image = new Image();
-        super.mapMediaFromJson(jsonObj, image);
-        return image;
+        this.addMediaRange(fakeImages.map(i => new Image().mapFromJson(i)));
     }
 }
 
