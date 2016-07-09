@@ -3,7 +3,7 @@ import {Route, IndexRoute, Redirect} from 'react-router';
 
 import {ContentList} from './ContentList';
 import ContentDetails from './ContentDetails';
-import ContentTypeList from './ContentTypeList';
+import {ContentTypeList} from './ContentTypeList';
 
 import {BookList, BookDetails} from './Books';
 import {QuoteList, QuoteDetail} from './Quotes';

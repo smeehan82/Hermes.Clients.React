@@ -1,37 +1,6 @@
-import {observable, computed, action, runInAction} from 'mobx';
+import * as Mobx from 'mobx';
 
-import {IContentType} from './ContentType';
-
-class ContentTypeStore {
-    constructor() {
-        this.getContentType();
-    }
-
-    @observable private _contentType: IContentType[] = [];
-
-    @computed get contentType() {
-        return this._contentType;
-    }
-
-    @action
-    private async getContentType() {
-        const contentType = await this.getContentTypeFromServer();
-        runInAction('getContentType', () => {
-            this._contentType = contentType;
-        });
-    }
-
-    private getContentTypeFromServer(): Promise<IContentType[]> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(fakeContentType);
-            }, 300);
-        });
-    }
-}
-
-const singleton = new ContentTypeStore();
-export default singleton;
+import {ContentType} from './ContentType';
 
 const fakeContentType = [
     {
@@ -53,3 +22,37 @@ const fakeContentType = [
         urlName: 'books'
     },
 ];
+
+class ContentTypeStore {
+    constructor() {
+        this.getContentType();
+    }
+
+    @Mobx.observable private _contentType: ContentType[] = [];
+
+    @Mobx.computed get contentType() {
+        return this._contentType;
+    }
+
+    @Mobx.action
+    //@TODO fix the async aspect of the store call
+    //private async getContentType() {
+    private getContentType() {
+        //const contentType = await this.getContentTypeFromServer();
+        //Mobx.runInAction('getContentType', () => {
+            //this._contentType = contentType;
+        this._contentType = fakeContentType.map(ct => new ContentType().mapFromJson(ct));
+        //});
+    }
+
+    private getContentTypeFromServer(): Promise<ContentType[]> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(fakeContentType);
+            }, 300);
+        });
+    }
+}
+
+const singleton = new ContentTypeStore();
+export default singleton;
