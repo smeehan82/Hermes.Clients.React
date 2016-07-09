@@ -44,16 +44,4 @@ export abstract class TaxonomyStore<TTaxonomy extends ITaxonomy> {
             }, 0);
         });
     }
-
-    protected mapTaxonomyFromJson(jsonObj: any, taxonomy: TTaxonomy): TTaxonomy {
-        taxonomy.id = jsonObj.id;
-        taxonomy.concurrencyStamp = jsonObj.concurrencyStamp;
-        taxonomy.title = jsonObj.title;
-        taxonomy.slug = jsonObj.slug;
-        taxonomy.dateCreated = jsonObj.dateCreated;
-        taxonomy.dateModified = jsonObj.dateModified;
-        taxonomy.datePublished = jsonObj.datePublished;
-
-        return taxonomy;
-    };
 }
