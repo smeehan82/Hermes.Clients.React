@@ -57,13 +57,7 @@ class CategoryStore extends TaxonomyStore<Category> {
 
     constructor() {
         super();
-        this.addTaxonomyRange(fakeCategorys.map(b => this.mapTaxonomyFromJson(b)));
-    }
-
-    protected mapTaxonomyFromJson(jsonObj: any): Category {
-        const category = new Category();
-        super.mapTaxonomyFromJson(jsonObj, category);
-        return category;
+        this.addTaxonomyRange(fakeCategorys.map(c => new Category().mapFromJson(c)));
     }
 }
 
