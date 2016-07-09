@@ -1,37 +1,6 @@
-import {observable, computed, action, runInAction} from 'mobx';
+import * as Mobx from 'mobx';
 
-import {ITaxonomyType} from './TaxonomyType';
-
-class TaxonomyTypeStore {
-    constructor() {
-        this.getTaxonomyType();
-    }
-
-    @observable private _taxonomyType: ITaxonomyType[] = [];
-
-    @computed get taxonomyType() {
-        return this._taxonomyType;
-    }
-
-    @action
-    private async getTaxonomyType() {
-        const taxonomyType = await this.getTaxonomyTypeFromServer();
-        runInAction('getTaxonomyType', () => {
-            this._taxonomyType = taxonomyType;
-        });
-    }
-
-    private getTaxonomyTypeFromServer(): Promise<ITaxonomyType[]> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(fakeTaxonomyType);
-            }, 300);
-        });
-    }
-}
-
-const singleton = new TaxonomyTypeStore();
-export default singleton;
+import {TaxonomyType} from './TaxonomyType';
 
 const fakeTaxonomyType = [
     {
@@ -47,3 +16,37 @@ const fakeTaxonomyType = [
         urlName: 'tags'
     },
 ];
+
+class TaxonomyTypeStore {
+    constructor() {
+        this.getTaxonomyType();
+    }
+
+    @Mobx.observable private _taxonomyType: TaxonomyType[] = [];
+
+    @Mobx.computed get taxonomyType() {
+        return this._taxonomyType;
+    }
+
+    @Mobx.action
+    //@TODO fix the async aspect of the store call
+    //private async getTaxonomyType() {
+    private getTaxonomyType() {
+        //const taxonomyType = await this.getTaxonomyTypeFromServer();
+        //Mobx.runInAction('getTaxonomyType', () => {
+            //this._taxonomyType = taxonomyType;
+        this._taxonomyType = fakeTaxonomyType.map(t => new TaxonomyType().mapFromJson(t));
+        //});
+    }
+
+    private getTaxonomyTypeFromServer(): Promise<TaxonomyType[]> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(fakeTaxonomyType);
+            }, 300);
+        });
+    }
+}
+
+const singleton = new TaxonomyTypeStore();
+export default singleton;

@@ -3,7 +3,7 @@ import {Route, IndexRoute, Redirect} from 'react-router';
 
 import {TaxonomyList} from './TaxonomyList';
 import TaxonomyDetails from './TaxonomyDetails';
-import TaxonomyTypeList from './TaxonomyTypeList';
+import {TaxonomyTypeList} from './TaxonomyTypeList';
 
 import {TagList, TagDetails} from './Tags';
 import {CategoryList, CategoryDetails} from './Categories';
