@@ -1,17 +1,42 @@
 import * as Mobx from 'mobx';
 
-import {IUser} from './User';
+import {User} from './User';
 
-export abstract class UserStore<TUser extends IUser> {
+const fakeUsers = [
+    {
+        concurrencyStamp: '8DB0DFBB-D863-4CBD-B029-5A8D72C83FC7',
+        id: '251B65DC-E822-4499-8364-51CCC9086C13',
+        email: 'smeehan@hermes.com',
+        userName: 'smeehan',
+        dateCreated: Date.now,
+        dateModified: Date.now
+    },
+    {
+        concurrencyStamp: 'CD2544FB-8CC4-428C-9ABB-03455FE71217',
+        id: '8F754ED6-09BB-4EF3-AECC-B98118ABB62C',
+        email: 'agrady@hermes.com',
+        userName: 'agrady',
+        dateCreated: Date.now,
+        dateModified: Date.now
+    },
+    {
+        concurrencyStamp: 'F9AE3CC5-DF71-4CB5-B84C-68532DF66DCD',
+        id: '5AAD6BF2-F52A-40D3-BB81-D8641677DA02',
+        email: 'administrator@hermes.com',
+        userName: 'administrator',
+        dateCreated: Date.now,
+        dateModified: Date.now
+    },
+];
+
+class UserStore {
     constructor() {
         this.getUser();
     }
 
-    @Mobx.observable
-    protected _user: TUser[] = [];
+    @Mobx.observable protected _user: User[] = [];
 
-    @Mobx.computed
-    get user(): TUser[] {
+    @Mobx.computed get user() {
         return this._user;
     }
 
@@ -19,42 +44,20 @@ export abstract class UserStore<TUser extends IUser> {
     //protected async getUser() {
     protected getUser() {
         //const user = await this.getUserFromServer();
-        this._user = [];
+        this._user = fakeUsers.map(u => new User().mapFromJson(u));
         //Mobx.runInAction('getUser', () => {
 //            this._user = user;
 //        });
     }
 
-    @Mobx.action
-    protected addUser(user: TUser): void {
-        this._user.push(user);
-    }
-
-    @Mobx.action
-    protected addUserRange(userRange: TUser[]): void {
-        for(const user of userRange) {
-            this._user.push(user);
-        }
-    }
-
-    private getUserFromServer(): Promise<TUser[]> {
+    private getUserFromServer(): Promise<User[]> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve([]);
             }, 0);
         });
     }
-
-    protected mapUserFromJson(jsonObj: any, user: TUser): TUser {
-        user.id = jsonObj.id;
-        user.concurrencyStamp = jsonObj.concurrencyStamp;
-        user.title = jsonObj.title;
-        user.slug = jsonObj.slug;
-        user.email = jsonObj.email;
-        user.userName = jsonObj.userName;
-        user.dateCreated = jsonObj.dateCreated;
-        user.dateModified = jsonObj.dateModified;
-
-        return user;
-    };
 }
+
+const singleton = new UserStore();
+export default singleton;
