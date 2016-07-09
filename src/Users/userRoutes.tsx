@@ -5,8 +5,8 @@ import {UserList} from './UserList';
 import {UserDetails} from './UserDetails';
 
 export default (
-    <Route path='/media'>
+    <Route path='/users'>
         <IndexRoute component={UserList} />
-        <Route path=':slug' component={UserDetails} />
+        <Route path=':userName' component={UserDetails} />
     </Route>
 );

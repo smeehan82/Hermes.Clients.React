@@ -8,6 +8,7 @@ function AppRoot({children}) {
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/sample-route-1'>Page 1</Link></li>
                 <li><Link to='/sample-route-2'>Page 2</Link></li>
+                <li><Link to='/users'>Users</Link></li>
             </ul>
             <hr />
             <div>
