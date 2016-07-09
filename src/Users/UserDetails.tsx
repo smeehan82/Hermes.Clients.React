@@ -3,20 +3,23 @@
 import * as React from 'react';
 import {observer} from 'mobx-react';
 
-import {IUser} from './User'
+import UserStore from './UserStore'
 
 interface IProps {
     params: {
-        slug: string;
+        userName: string;
     };
 }
 
 @observer
 export class UserDetails extends React.Component<IProps, void> {
-
     render() {
+        const user = UserStore.user.find(u=>u.userName === this.props.params.userName);
+
         return (
             <div>
+                <h2>{user.userName}</h2>
+                <p>{user.email}</p>
                 [Generic User Details]
             </div>
         );
