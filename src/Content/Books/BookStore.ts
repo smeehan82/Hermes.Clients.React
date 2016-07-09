@@ -17,18 +17,9 @@ const fakeBooks = [
 ];
 
 class BookStore extends ContentStore<Book> {
-
     constructor() {
         super();
-        this.addContentRange(fakeBooks.map(b => this.mapContentFromJson(b)));
-    }
-
-    protected mapContentFromJson(jsonObj: any): Book {
-        const book = new Book();
-        super.mapContentFromJson(jsonObj, book);
-        book.author = jsonObj.author;
-
-        return book;
+        this.addContentRange(fakeBooks.map(b => new Book().mapFromJson(b)));
     }
 }
 
