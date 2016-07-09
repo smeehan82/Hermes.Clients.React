@@ -3,7 +3,7 @@ import {Route, IndexRoute, Redirect} from 'react-router';
 
 import {MediaList} from './MediaList';
 import MediaDetails from './MediaDetails';
-import MediaTypeList from './MediaTypeList';
+import {MediaTypeList} from './MediaTypeList';
 
 import {DocumentList, DocumentDetails} from './Documents';
 import {ImageList, ImageDetails} from './Images';

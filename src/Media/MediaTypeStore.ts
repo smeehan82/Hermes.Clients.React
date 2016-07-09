@@ -1,37 +1,6 @@
-import {observable, computed, action, runInAction} from 'mobx';
+import * as Mobx from 'mobx';
 
-import {IMediaType} from './MediaType';
-
-class MediaTypeStore {
-    constructor() {
-        this.getMediaType();
-    }
-
-    @observable private _mediaType: IMediaType[] = [];
-
-    @computed get mediaType() {
-        return this._mediaType;
-    }
-
-    @action
-    private async getMediaType() {
-        const mediaType = await this.getMediaTypeFromServer();
-        runInAction('getMediaType', () => {
-            this._mediaType = mediaType;
-        });
-    }
-
-    private getMediaTypeFromServer(): Promise<IMediaType[]> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(fakeMediaType);
-            }, 300);
-        });
-    }
-}
-
-const singleton = new MediaTypeStore();
-export default singleton;
+import {MediaType} from './MediaType';
 
 const fakeMediaType = [
     {
@@ -53,3 +22,37 @@ const fakeMediaType = [
         urlName: 'images'
     },
 ];
+
+class MediaTypeStore {
+    constructor() {
+        this.getMediaType();
+    }
+
+    @Mobx.observable private _mediaType: MediaType[] = [];
+
+    @Mobx.computed get mediaType() {
+        return this._mediaType;
+    }
+
+    @Mobx.action
+    //@TODO fix the async aspect of the store call
+    //private async getMediaType() {
+    private getMediaType() {
+        //const mediaType = await this.getMediaTypeFromServer();
+        //Mobx.runInAction('getMediaType', () => {
+            //this._mediaType = mediaType;
+        this._mediaType = fakeMediaType.map(mt => new MediaType().mapFromJson(mt));
+        //});
+    }
+
+    private getMediaTypeFromServer(): Promise<MediaType[]> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(fakeMediaType);
+            }, 300);
+        });
+    }
+}
+
+const singleton = new MediaTypeStore();
+export default singleton;
